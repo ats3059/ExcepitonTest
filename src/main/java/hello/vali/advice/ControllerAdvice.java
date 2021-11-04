@@ -9,13 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 //@RestControllerAdvice
 public class ControllerAdvice {
 
-//    @ExceptionHandler
-//    public ResponseEntity<> userFault(BindException){
-//
-//
-//
-//        return  ResponseEntity<>;
-//    }
+
 
 
 }
