@@ -1,21 +1,25 @@
 package hello.vali.advice;
 
 
+import hello.vali.testDto.TestEx;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-//@RestControllerAdvice
+@RestControllerAdvice
 public class ControllerAdvice {
+    @ExceptionHandler
+    public ResponseEntity<TestEx> userFault(BindException bindException){
+        TestEx testEx = TestEx.builder()
+                              .status(HttpStatus.BAD_REQUEST.value())
+                              .code("customCode")
+                              .message("customMessage").build();
+        testEx.ApiResultError(bindException.getBindingResult());
 
-//    @ExceptionHandler
-//    public ResponseEntity<> userFault(BindException){
-//
-//
-//
-//        return  ResponseEntity<>;
-//    }
+        return  new ResponseEntity<>(testEx,HttpStatus.BAD_REQUEST);
+    }
 
 
 }
