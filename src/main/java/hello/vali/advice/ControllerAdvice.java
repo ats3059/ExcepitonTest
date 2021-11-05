@@ -8,6 +8,8 @@ import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.time.LocalDateTime;
+
 @RestControllerAdvice
 public class ControllerAdvice {
     @ExceptionHandler
@@ -15,7 +17,9 @@ public class ControllerAdvice {
         TestEx testEx = TestEx.builder()
                               .status(HttpStatus.BAD_REQUEST.value())
                               .code("customCode")
-                              .message("customMessage").build();
+                              .message("customMessage")
+                              .curTime(LocalDateTime.now().toString())
+                              .build();
         testEx.ApiResultError(bindException.getBindingResult());
 
         return  new ResponseEntity<>(testEx,HttpStatus.BAD_REQUEST);

@@ -2,6 +2,7 @@ package hello.vali.testDto;
 
 import lombok.Builder;
 import lombok.Getter;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.BindingResult;
 
 import java.util.List;
@@ -10,9 +11,10 @@ import java.util.stream.Collectors;
 @Builder
 @Getter
 public class TestEx {
-
+    @DateTimeFormat(pattern="yyyyMMddHHmmss")
+    private String curTime;
     private String message;
-    private int status;
+    private Integer status;
     private List<FieldError> errors;
     private String code;
 
