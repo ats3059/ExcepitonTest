@@ -12,6 +12,11 @@ import java.time.LocalDateTime;
 
 @RestControllerAdvice
 public class ControllerAdvice {
+    
+    
+    // 해당 예외는 BindException 발생 했을 경우에 터진다 (handler)
+    // 다른 예외는 @ExceptionHandler 등록 후 사용 Exception으로 등록 할 경우 모든 예외의 부모 -> 하위 예외도 전부 잡아버림
+    // 예외는 상세한 순서로 잡힘.
     @ExceptionHandler
     public ResponseEntity<TestEx> userFault(BindException bindException){
         TestEx testEx = TestEx.builder()
