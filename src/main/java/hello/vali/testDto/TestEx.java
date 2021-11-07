@@ -26,16 +26,18 @@ public class TestEx {
     static class FieldError {
         private String field;
         private String message;
+        private String rejectedVal;
 
-        private FieldError(String title, String message) {
+        private FieldError(String title, String message, String rejectedVal) {
             this.field = title;
             this.message = message;
+            this.rejectedVal = rejectedVal;
         }
 
         private static List<FieldError> fieldList(BindingResult bind) {
             List<org.springframework.validation.FieldError> list = bind.getFieldErrors();
             return list.stream()
-                    .map((innerObject) -> new FieldError(innerObject.getField(), innerObject.getDefaultMessage()))
+                    .map((innerObject) -> new FieldError(innerObject.getField(), innerObject.getDefaultMessage(),innerObject.getRejectedValue().toString()))
                     .collect(Collectors.toList());
         }
     }

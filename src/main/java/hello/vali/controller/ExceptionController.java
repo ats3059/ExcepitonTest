@@ -3,6 +3,8 @@ package hello.vali.controller;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,8 +29,10 @@ public class ExceptionController {
     @Getter
     @Setter
     static class TestDTO{
+        @Length(min = 5 ,max = 15)
         @NotBlank
         private String name;
+
         @NotBlank
         private String age;
     }
