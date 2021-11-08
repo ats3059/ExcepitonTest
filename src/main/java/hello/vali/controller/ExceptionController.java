@@ -32,7 +32,6 @@ public class ExceptionController {
         @Length(min = 5 ,max = 15)
         @NotBlank
         private String name;
-
         @NotBlank
         private String age;
     }
