@@ -3,6 +3,7 @@ package hello.vali.advice;
 
 import hello.vali.testDto.TestEx;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
@@ -13,7 +14,12 @@ import java.time.LocalDateTime;
 @Slf4j
 @RestControllerAdvice
 public class ControllerAdvice {
-    
+    public final MessageSource messageSource;
+
+    ControllerAdvice(MessageSource messageSource){
+        this.messageSource = messageSource;
+    }
+
     
     // 해당 예외는 BindException 발생 했을 경우에 터진다 (handler)
     // 다른 예외는 @ExceptionHandler 등록 후 사용 Exception으로 등록 할 경우 모든 예외의 부모 -> 하위 예외도 전부 잡아버림
@@ -31,7 +37,7 @@ public class ControllerAdvice {
             log.info("rejectValue = {}" , value.getRejectedValue());
         });
 
-        testEx.ApiResultError(bindException.getBindingResult());
+        testEx.ApiResultError(bindException.getBindingResult(),messageSource);
 
         return  new ResponseEntity<>(testEx,HttpStatus.BAD_REQUEST);
     }
